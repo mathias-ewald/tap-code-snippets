@@ -1,0 +1,15 @@
+#@data/values
+---
+tanzunet:
+  username: "mathiase@vmware.com"
+  password: "*******************"
+
+container_registry:
+  hostname: "gci.io"
+  project: "cso-pcfs-emea-mewald"
+  repository:
+    build_service: build-service
+  username: "_json_key"
+  password: "*******************"
+    
+domain: tap.halusky.net

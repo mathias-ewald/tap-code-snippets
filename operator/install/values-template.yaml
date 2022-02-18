@@ -1,0 +1,60 @@
+#@ load("@ytt:data", "data")
+---
+profile: full
+
+ceip_policy_disclosed: true
+
+buildservice:
+  kp_default_repository: #@ "{}/{}/{}".format(data.values.container_registry.hostname, data.values.container_registry.project, data.values.container_registry.repository.build_service)
+  kp_default_repository_username: #@ data.values.container_registry.username
+  kp_default_repository_password: #@ data.values.container_registry.password
+  tanzunet_username: #@ data.values.tanzunet.username
+  tanzunet_password: #@ "{}".format(data.values.tanzunet.password)
+  descriptor_name: "tap-1.0.0-full"
+  enable_automatic_dependency_updates: true
+
+supply_chain: basic
+
+cnrs:
+  domain_name: #@ "cnrs.{}".format(data.values.domain)
+
+ootb_supply_chain_basic:
+  registry:
+    server: #@ data.values.container_registry.hostname
+    repository: #@ "{}/{}".format(data.values.container_registry.project, data.values.container_registry.repository.build_service)
+  gitops:
+    ssh_secret: ""
+
+learningcenter:
+  ingressDomain: #@ "tlc.{}".format(data.values.domain)
+
+tap_gui:
+  service_type: ClusterIP
+  ingressEnabled: "true"
+  ingressDomain: #@ data.values.domain
+  app_config:
+    app:
+      baseUrl: #@ "http://tap-gui.{}".format(data.values.domain)
+    backend:
+      baseUrl: #@ "http://tap-gui.{}".format(data.values.domain)
+      cors:
+        origin: #@ "http://tap-gui.{}".format(data.values.domain)
+
+metadata_store:
+  app_service_type: LoadBalancer
+
+grype:
+  namespace: "default"
+  targetImagePullSecret: "tap-registry"
+
+contour:
+  envoy:
+    service:
+      type: LoadBalancer
+
+accelerator:
+  domain: #@ data.values.domain
+  ingress:
+    include: true
+  server:
+    service_type: ClusterIP
