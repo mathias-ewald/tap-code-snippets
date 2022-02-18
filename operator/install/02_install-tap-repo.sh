@@ -14,7 +14,10 @@ if [ $ALL_GOOD != "yes" ]; then exit 1; fi
 
 
 # Install the TAP repo
-kubectl create ns tap-install
+kubectl get ns tap-install > /dev/nulll 2>&1
+if [ $? -ne 0 ]; then 
+  kubectl create ns tap-install
+fi
 
 tanzu secret registry add tap-registry \
   --username ${INSTALL_REGISTRY_USERNAME} --password ${INSTALL_REGISTRY_PASSWORD} \
