@@ -1,15 +1,17 @@
 #@data/values
 ---
+
+#@overlay/match missing_ok=True
 tanzunet:
-  username: "mathiase@vmware.com"
-  password: "*******************"
 
 container_registry:
-  hostname: "gci.io"
+  hostname: "gcr.io"
   project: "cso-pcfs-emea-mewald"
   repository:
     build_service: build-service
-  username: "_json_key"
-  password: "*******************"
+  #@overlay/match missing_ok=True
+  username:
+  #@overlay/match missing_ok=True
+  password:
     
 domain: tap.halusky.net

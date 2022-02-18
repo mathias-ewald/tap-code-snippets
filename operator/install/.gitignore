@@ -1,5 +1,5 @@
 values.yaml
-config.yaml
+secrets.yaml
 tanzu-cluster-essentials
 *.tgz
 *.tar
