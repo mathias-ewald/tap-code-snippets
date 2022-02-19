@@ -5,7 +5,7 @@ export DEBIAN_FRONTEND=noninteractive
 sudo apt update
 sudo apt upgrade -y
 
-sudo apt install -y vim git tmux jq unzip
+sudo apt install -y vim git tmux jq unzip tree htop
 
 # Install Docker
 sudo apt-get install -y ca-certificates curl gnupg lsb-release
@@ -18,3 +18,14 @@ echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docke
 
 sudo apt update
 sudo apt install -y docker.io
+
+# Install Kubectl
+sudo apt-get update
+sudo apt-get install -y apt-transport-https ca-certificates curl
+
+sudo curl -fsSLo /usr/share/keyrings/kubernetes-archive-keyring.gpg https://packages.cloud.google.com/apt/doc/apt-key.gpg
+
+echo "deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
+
+sudo apt-get update
+sudo apt-get install -y kubectl

@@ -1,17 +1,16 @@
 #!/bin/bash
 
-VERSION="1.0.0"
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+DOWNLOADS_DIR="$SCRIPT_DIR/downloads"
 
 # Check if Tanzu Cluster Essentials bundle is available
-FILE_NAME="tanzu-cluster-essentials-$(uname -s | tr '[:upper:]' '[:lower:]')-amd64-${VERSION}.tgz"
-FILE_PATH="$SCRIPT_DIR/$FILE_NAME"
+FILE_PATH="$DOWNLOADS_DIR/tanzu-cluster-essentials.tgz"
 if [ ! -f $FILE_PATH ]; then
     echo "Download file $FILE_NAME from Tanzu Network and run again."
 fi
 
 # Extract Tanzu Cluster Essentials
-CLUSTER_ESSENTIALS_DIR=$SCRIPT_DIR/tanzu-cluster-essentials
+CLUSTER_ESSENTIALS_DIR=$DOWNLOADS_DIR/tanzu-cluster-essentials
 if [ -d $CLUSTER_ESSENTIALS_DIR ]; then
   rm -fR $CLUSTER_ESSENTIALS_DIR
 fi

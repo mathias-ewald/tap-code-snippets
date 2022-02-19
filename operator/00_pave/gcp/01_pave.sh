@@ -1,6 +1,8 @@
 #!/bin/bash
 set -euo pipefail
 
+export GOOGLE_APPLICATION_CREDENTIALS=${GOOGLE_APPLICATION_CREDENTIALS}
+
 export TF_VAR_region="$REGION"
 export TF_VAR_project_id="$PROJECT_ID"
 export TF_VAR_environment="$ENVIRONMENT_NAME"
