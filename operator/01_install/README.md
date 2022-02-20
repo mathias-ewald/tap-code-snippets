@@ -4,6 +4,9 @@
 ```
 PROJECT_ID="cso-pcfs-emea-mewald"
 REGION="europe-west1"
+
+TANZUNET_USERNAME="mathiase@vmware.com"
+TANZUNET_PASSWORD="**************"
 ```
 
 ### Setup gcloud CLI
@@ -24,3 +27,13 @@ export REFRESH_TOKEN="*****************"
 ./00_download.sh
 ```
 
+## Install Tanzu Cluster Essentials
+
+```
+export INSTALL_BUNDLE=registry.tanzu.vmware.com/tanzu-cluster-essentials/cluster-essentials-bundle@sha256:82dfaf70656b54dcba0d4def85ccae1578ff27054e7533d08320244af7fb0343
+export INSTALL_REGISTRY_HOSTNAME=registry.tanzu.vmware.com
+export INSTALL_REGISTRY_USERNAME="$TANZUNET_USERNAME"
+export INSTALL_REGISTRY_PASSWORD="$TANZUNET_PASSWORD"
+
+./01_install-cluster-essentials.sh
+```
