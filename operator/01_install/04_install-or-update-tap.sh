@@ -33,6 +33,7 @@ tanzu package $ACTION tap \
   -p tap.tanzu.vmware.com \
   -v "$TAP_VERSION" \
   --values-file values.yaml \
+  --wait="false" \
   -n "$NAMESPACE"
 
 echo "##################################################################"
