@@ -23,11 +23,6 @@ fi
 mkdir $CLUSTER_ESSENTIALS_DIR
 tar xvf $FILE_PATH -C $CLUSTER_ESSENTIALS_DIR > /dev/null 2>&1
 
-# Install kapp CLI
-if [ ! -f /usr/local/bin/kapp ]; then
-  sudo cp $CLUSTER_ESSENTIALS_DIR/kapp /usr/local/bin/kapp
-fi
-
 # Validate environment variables are set
 ALL_GOOD="yes"
 for I in INSTALL_BUNDLE INSTALL_REGISTRY_HOSTNAME INSTALL_REGISTRY_USERNAME INSTALL_REGISTRY_PASSWORD; do
@@ -42,4 +37,10 @@ if [ $ALL_GOOD != "yes" ]; then exit 1; fi
 # Install Tanzu Cluster Essentials
 pushd $CLUSTER_ESSENTIALS_DIR
   ./install.sh
+
+  # Install Carvel tools locally
+  for I in imgpkg kapp kbld ytt; do 
+    sudo install ./$I /usr/local/bin/$I
+    $I --version
+  done
 popd

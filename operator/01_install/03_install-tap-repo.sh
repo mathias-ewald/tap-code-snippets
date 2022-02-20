@@ -1,21 +1,20 @@
 #!/bin/bash
+set -euo pipefail
+
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
-# Validate environment variables are set
-ALL_GOOD="yes"
-for I in INSTALL_BUNDLE INSTALL_REGISTRY_HOSTNAME INSTALL_REGISTRY_USERNAME INSTALL_REGISTRY_PASSWORD TAP_VERSION; do
-    env | grep "$I="
-    if [ "$?" -ne 0 ]; then
-        echo "Variable $I is not set or not exported."
-        ALL_GOOD="no"
-    fi
-done
-if [ $ALL_GOOD != "yes" ]; then exit 1; fi
-
+INSTALL_BUNDLE=${INSTALL_BUNDLE}
+INSTALL_REGISTRY_HOSTNAME=${INSTALL_REGISTRY_HOSTNAME}
+INSTALL_REGISTRY_USERNAME=${INSTALL_REGISTRY_USERNAME}
+INSTALL_REGISTRY_PASSWORD=${INSTALL_REGISTRY_PASSWORD}
+TAP_VERSION=${TAP_VERSION}
 
 # Install the TAP repo
-kubectl get ns tap-install > /dev/nulll 2>&1
-if [ $? -ne 0 ]; then 
+set +e
+kubectl get ns tap-install > /dev/null 2>&1
+RETVAL=$?
+set -e
+if [ $RETVAL -ne 0 ]; then 
   kubectl create ns tap-install
 fi
 

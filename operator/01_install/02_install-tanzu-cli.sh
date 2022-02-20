@@ -1,15 +1,15 @@
 #!/bin/bash
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+DOWNLOAD_DIR="$SCRIPT_DIR/downloads"
 
 # Check if Tanzu Frameswork bundle is available
-FILE_NAME="tanzu-framework--$(uname -s | tr '[:upper:]' '[:lower:]')-amd64.tar"
-FILE_PATH="$SCRIPT_DIR/$FILE_NAME"
+FILE_PATH="$DOWNLOAD_DIR/tanzu-framework.tar"
 if [ ! -f $FILE_PATH ]; then
-    echo "Download file $FILE_NAME from Tanzu Network and run again."
+  echo "Download file $FILE_PATH from Tanzu Network and run again."
 fi
 
 # Extract Tanzu Framework
-FRAMEWORK_DIR=$SCRIPT_DIR/tanzu-framework
+FRAMEWORK_DIR=$DOWNLOAD_DIR/tanzu-framework
 if [ -d $FRAMEWORK_DIR ]; then
   rm -fR $FRAMEWORK_DIR
 fi

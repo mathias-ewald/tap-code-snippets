@@ -6,7 +6,7 @@ SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 NAMESPACE="tap-install"
 TAP_VERSION="1.0.1"
 
-if [ ! -f $SCRIPT_DIR/config.yaml ]; 
+if [ ! -f $SCRIPT_DIR/config.yaml ]; then 
   echo "File config.yaml does not exist. Copy from config-extample.yaml and modify for your environment."
   exit 1
 fi 
