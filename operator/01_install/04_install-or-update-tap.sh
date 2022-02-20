@@ -21,7 +21,7 @@ function check_install_or_upgrade () {
 }
 
 # Generate the final values.yaml for the TAP package
-ytt -f values-template.yaml -f config.yaml > values.yaml
+ytt -f values-template.yaml -f config.yaml -f secrets.yaml > values.yaml
 
 # Install or update the TAP package
 ACTION="install"

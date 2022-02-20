@@ -3,7 +3,7 @@
 ## Preparations
 ```
 PROJECT_ID="cso-pcfs-emea-mewald"
-REGION="europe-west1"
+REGION="europe-west3"
 
 TANZUNET_USERNAME="mathiase@vmware.com"
 TANZUNET_PASSWORD="**************"
