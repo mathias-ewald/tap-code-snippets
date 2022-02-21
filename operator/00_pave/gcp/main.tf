@@ -50,6 +50,7 @@ module "gke" {
   http_load_balancing        = false
   horizontal_pod_autoscaling = true
   network_policy             = false
+  remove_default_node_pool   = true
   cluster_autoscaling = {
     enabled       = false
     max_cpu_cores = 0
@@ -61,10 +62,10 @@ module "gke" {
   node_pools = [
     {
       name                   = "default-node-pool"
-      machine_type           = "e2-medium"
+      machine_type           = "e2-standard-4"
       node_locations         = join(",", var.zones)
       min_count              = 1
-      max_count              = 3
+      max_count              = 1
       local_ssd_count        = 0
       disk_size_gb           = 100
       disk_type              = "pd-standard"
