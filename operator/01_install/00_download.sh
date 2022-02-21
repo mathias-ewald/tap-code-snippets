@@ -23,5 +23,5 @@ function tanzunet_download () {
     https://network.tanzu.vmware.com/api/v2/products/$PRODUCT_ID/releases/$RELEASE_ID/product_files/$PRODUCT_FILE_ID/download
 }
 
-tanzunet_download tanzu-framework.tar tanzu-application-platform 1049494 1156163
+tanzunet_download tanzu-framework.tar tanzu-application-platform 1048855 1156172
 tanzunet_download tanzu-cluster-essentials.tgz tanzu-cluster-essentials 1011100 1105818
