@@ -10,3 +10,5 @@ gcloud config set project $PROJECT_ID
 gcloud container clusters get-credentials tap-cluster-demo \
   --region $REGION \
   --project $PROJECT_ID
+
+

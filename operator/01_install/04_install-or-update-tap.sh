@@ -4,7 +4,7 @@ set -euo pipefail
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
 NAMESPACE="tap-install"
-TAP_VERSION="1.0.1"
+TAP_VERSION="$TAP_VERSION"
 
 # Create ClusterRoleBinding to allow PSP
 set +e

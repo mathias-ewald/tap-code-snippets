@@ -17,7 +17,7 @@ export INSTALL_BUNDLE=registry.tanzu.vmware.com/tanzu-cluster-essentials/cluster
 export INSTALL_REGISTRY_HOSTNAME=registry.tanzu.vmware.com
 export INSTALL_REGISTRY_USERNAME="$TANZUNET_USERNAME"
 export INSTALL_REGISTRY_PASSWORD="$TANZUNET_PASSWORD"
-export TAP_VERSION="1.0.1"
+export TAP_VERSION="1.0.2"
 
 ./01_install-cluster-essentials.sh
 ./02_install-tanzu-cli.sh
