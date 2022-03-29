@@ -7,7 +7,7 @@ NAMESPACE="default"
 # Values for Google Container Registry (GCR)
 REGISTRY_SERVER="gcr.io"
 REGISTRY_USERNAME="_json_key"
-REGISTRY_PASSWORD_FILE=$GCP_KEY_FILE
+REGISTRY_PASSWORD_FILE=$GOOGLE_APPLICATION_CREDENTIALS
 
 tanzu secret registry add registry-credentials \
   --server REGISTRY_SERVER \
