@@ -2,7 +2,9 @@
 set -euxo pipefail
 
 # Name of the developer namespace
-NAMESPACE="default"
+NAMESPACE="$1"
+
+kubectl create ns $NAMESPACE
 
 # Values for Google Container Registry (GCR)
 REGISTRY_SERVER="gcr.io"
