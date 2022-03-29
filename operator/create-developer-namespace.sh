@@ -10,7 +10,7 @@ REGISTRY_USERNAME="_json_key"
 REGISTRY_PASSWORD_FILE=$GOOGLE_APPLICATION_CREDENTIALS
 
 tanzu secret registry add registry-credentials \
-  --server REGISTRY_SERVER \
+  --server $REGISTRY_SERVER \
   --username "$REGISTRY_USERNAME" \
   --password-file "$REGISTRY_PASSWORD_FILE" \
   --namespace "$NAMESPACE"
