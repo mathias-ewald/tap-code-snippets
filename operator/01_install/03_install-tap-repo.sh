@@ -8,16 +8,17 @@ INSTALL_REGISTRY_HOSTNAME=${INSTALL_REGISTRY_HOSTNAME}
 INSTALL_REGISTRY_USERNAME=${INSTALL_REGISTRY_USERNAME}
 INSTALL_REGISTRY_PASSWORD=${INSTALL_REGISTRY_PASSWORD}
 TAP_VERSION=${TAP_VERSION}
+TAP_PACKAGE_REPO="${TAP_PACKAGE_REPO:-tap}"
 
-# Install the TAP repo
-set +e
-kubectl get ns tap-install > /dev/null 2>&1
-RETVAL=$?
-set -e
-if [ $RETVAL -ne 0 ]; then 
-  kubectl create ns tap-install
-fi
+# Copy all images into own registry
+imgpkg copy \
+  -b registry.tanzu.vmware.com/tanzu-application-platform/tap-packages:${TAP_VERSION} \
+  --to-repo ${INSTALL_REGISTRY_HOSTNAME}/${TAP_PACKAGE_REPO}/tap-packages
 
+# Create namespace if not exists
+kubectl create namespace tap-install --dry-run=client -o yaml | kubectl apply -f -
+
+# Add secret and repository
 tanzu secret registry add tap-registry \
   --username ${INSTALL_REGISTRY_USERNAME} --password ${INSTALL_REGISTRY_PASSWORD} \
   --server ${INSTALL_REGISTRY_HOSTNAME} \
@@ -27,6 +28,7 @@ tanzu package repository add tanzu-tap-repository \
   --url registry.tanzu.vmware.com/tanzu-application-platform/tap-packages:$TAP_VERSION \
   --namespace tap-install
 
+# Validate
 tanzu package repository get tanzu-tap-repository --namespace tap-install
 
 tanzu package available list --namespace tap-install
