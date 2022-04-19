@@ -13,11 +13,11 @@ TANZUNET_PASSWORD="**************"
 export REFRESH_TOKEN="*****************"
 ./00_download.sh
 
-export INSTALL_BUNDLE=registry.tanzu.vmware.com/tanzu-cluster-essentials/cluster-essentials-bundle@sha256:82dfaf70656b54dcba0d4def85ccae1578ff27054e7533d08320244af7fb0343
+export INSTALL_BUNDLE=registry.tanzu.vmware.com/tanzu-cluster-essentials/cluster-essentials-bundle@sha256:ab0a3539da241a6ea59c75c0743e9058511d7c56312ea3906178ec0f3491f51d
 export INSTALL_REGISTRY_HOSTNAME=registry.tanzu.vmware.com
 export INSTALL_REGISTRY_USERNAME="$TANZUNET_USERNAME"
 export INSTALL_REGISTRY_PASSWORD="$TANZUNET_PASSWORD"
-export TAP_VERSION="1.0.2"
+export TAP_VERSION="1.1.0"
 
 ./01_install-cluster-essentials.sh
 ./02_install-tanzu-cli.sh
