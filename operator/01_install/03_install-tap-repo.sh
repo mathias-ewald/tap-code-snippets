@@ -11,7 +11,7 @@ TAP_VERSION=${TAP_VERSION}
 TAP_PACKAGE_REPO="${TAP_PACKAGE_REPO:-tap}"
 
 # Copy all images into own registry
-if [ "$INSTALL_REGISTRY_HOSTNAME" != "registry.tanzu.vmware.com"]
+if [ "$INSTALL_REGISTRY_HOSTNAME" != "registry.tanzu.vmware.com"]; then
   imgpkg copy \
     -b registry.tanzu.vmware.com/tanzu-application-platform/tap-packages:${TAP_VERSION} \
     --to-repo ${INSTALL_REGISTRY_HOSTNAME}/${TAP_PACKAGE_REPO}/tap-packages
