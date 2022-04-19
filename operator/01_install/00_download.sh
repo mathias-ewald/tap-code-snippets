@@ -25,9 +25,8 @@ function tanzunet_download () {
     https://network.tanzu.vmware.com/api/v2/products/$PRODUCT_ID/releases/$RELEASE_ID/product_files/$PRODUCT_FILE_ID/download
 }
 
+# https://network.tanzu.vmware.com/api/v2/products/tanzu-application-platform/releases/1078790/product_files/1190781/download
+tanzunet_download tanzu-framework.tar tanzu-application-platform 1078790 1190781
 
-# https://network.tanzu.vmware.com/api/v2/products/tanzu-application-platform/releases/1059919/product_files/1156168/download
-tanzunet_download tanzu-framework.tar tanzu-application-platform 1059919 1156168
-
-# https://network.tanzu.vmware.com/api/v2/products/tanzu-cluster-essentials/releases/1011100/product_files/1105818/download
-tanzunet_download tanzu-cluster-essentials.tgz tanzu-cluster-essentials 1011100 1105818
+# https://network.tanzu.vmware.com/api/v2/products/tanzu-cluster-essentials/releases/1077299/product_files/1191987/download
+tanzunet_download tanzu-cluster-essentials.tgz tanzu-cluster-essentials 1077299 1191987
