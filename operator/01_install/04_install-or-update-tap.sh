@@ -7,6 +7,7 @@ NAMESPACE="tap-install"
 TAP_VERSION="$TAP_VERSION"
 
 # Create ClusterRoleBinding to allow PSP
+# TODO: Move to Paving Phase for GCP
 set +e
 kubectl create clusterrolebinding tap-psp-rolebinding \
   --group=system:authenticated \
