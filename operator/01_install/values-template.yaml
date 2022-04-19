@@ -10,7 +10,7 @@ buildservice:
   kp_default_repository_password: #@ data.values.container_registry.password
   tanzunet_username: #@ data.values.tanzunet.username
   tanzunet_password: #@ "{}".format(data.values.tanzunet.password)
-  descriptor_name: "tap-1.0.0-full"
+  descriptor_name: "full"
   enable_automatic_dependency_updates: true
 
 supply_chain: basic
