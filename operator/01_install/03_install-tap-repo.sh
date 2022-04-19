@@ -11,9 +11,11 @@ TAP_VERSION=${TAP_VERSION}
 TAP_PACKAGE_REPO="${TAP_PACKAGE_REPO:-tap}"
 
 # Copy all images into own registry
-imgpkg copy \
-  -b registry.tanzu.vmware.com/tanzu-application-platform/tap-packages:${TAP_VERSION} \
-  --to-repo ${INSTALL_REGISTRY_HOSTNAME}/${TAP_PACKAGE_REPO}/tap-packages
+if [ "$INSTALL_REGISTRY_HOSTNAME" != "registry.tanzu.vmware.com"]
+  imgpkg copy \
+    -b registry.tanzu.vmware.com/tanzu-application-platform/tap-packages:${TAP_VERSION} \
+    --to-repo ${INSTALL_REGISTRY_HOSTNAME}/${TAP_PACKAGE_REPO}/tap-packages
+fi
 
 # Create namespace if not exists
 kubectl create namespace tap-install --dry-run=client -o yaml | kubectl apply -f -
