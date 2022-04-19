@@ -36,7 +36,7 @@ if [ $ALL_GOOD != "yes" ]; then exit 1; fi
 
 # Install Tanzu Cluster Essentials
 pushd $CLUSTER_ESSENTIALS_DIR
-  ./install.sh
+  ./install.sh --yes
 
   # Install Carvel tools locally
   for I in imgpkg kapp kbld ytt; do 
