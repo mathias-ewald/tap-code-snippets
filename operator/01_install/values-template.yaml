@@ -23,7 +23,13 @@ ootb_supply_chain_basic:
     server: #@ data.values.container_registry.hostname
     repository: #@ "{}/{}".format(data.values.container_registry.project, data.values.container_registry.repository.build_service)
   gitops:
-    ssh_secret: ""
+    repository_prefix: git@github.com:mathias-ewald/
+    branch: main
+    user_name: supplychain
+    user_email: supplychain
+    commit_message: supplychain@cluster.local
+    ssh_secret: git-ssh
+  service_account: default
 
 learningcenter:
   ingressDomain: #@ "tlc.{}".format(data.values.domain)
