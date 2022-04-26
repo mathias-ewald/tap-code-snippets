@@ -12,6 +12,7 @@ export ENVIRONMENT_NAME="demo"
 export REGION="europe-west3"
 export GOOGLE_APPLICATION_CREDENTIALS=/Users/mathiase/Downloads/cso-pcfs-emea-mewald-b8675a652dea.json
 ```
+**Choose something unique for `ENVIRONMENT_NAME`**
 
 ## Run Terraform
 
