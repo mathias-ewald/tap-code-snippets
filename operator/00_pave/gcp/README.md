@@ -1,5 +1,9 @@
 # Pave Environment On GCP
 
+## Prerequisistes
+- Terraform (tested with 1.1.9)
+- Enable [Cloud Identity-Aware Proxy API](https://console.developers.google.com/apis/api/iap.googleapis.com/overview) in your GCP project
+
 ## Configuration
 
 ```
