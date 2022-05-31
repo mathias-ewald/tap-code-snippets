@@ -23,8 +23,16 @@ export TAP_VERSION="1.1.0"
 ./02_install-tanzu-cli.sh
 ./03_install-tap-repo.sh
 ./04_install-or-update-tap.sh
+./05_dns-records.sh
+./06_tls.sh
 ```
 
 ```
 watch kubectl get packageinstalls -A
+```
+
+# Uninstall
+
+```
+./99_uninstall.sh
 ```
