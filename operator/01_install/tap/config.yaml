@@ -15,3 +15,12 @@ container_registry:
   password:
     
 domain: tap.halusky.net
+
+cloudDNS:
+  project: cso-pcfs-emea-mewald
+  #@overlay/match missing_ok=True
+  key:
+
+letsencrypt:
+  email: mathias.ewald@googlemail.com
+  issuer: letsencrypt-dns

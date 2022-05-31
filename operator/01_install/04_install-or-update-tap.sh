@@ -5,6 +5,7 @@ SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
 NAMESPACE="tap-install"
 TAP_VERSION="$TAP_VERSION"
+TAP_DIR=$SCRIPT_DIR/tap
 
 # Create ClusterRoleBinding to allow PSP
 # TODO: Move to Paving Phase for GCP
@@ -14,7 +15,7 @@ kubectl create clusterrolebinding tap-psp-rolebinding \
   --clusterrole=gce:podsecuritypolicy:privileged
 set -e 
 
-if [ ! -f $SCRIPT_DIR/config.yaml ]; then 
+if [ ! -f $TAP_DIR/config.yaml ]; then 
   echo "File config.yaml does not exist. Copy from config-extample.yaml and modify for your environment."
   exit 1
 fi 
@@ -29,7 +30,7 @@ function check_install_or_upgrade () {
 }
 
 # Generate the final values.yaml for the TAP package
-ytt -f values-template.yaml -f config.yaml -f secrets.yaml > values.yaml
+ytt -f $TAP_DIR/values-template.yaml -f $TAP_DIR/config.yaml -f $TAP_DIR/secrets.yaml > $TAP_DIR/values.yaml
 
 # Install or update the TAP package
 ACTION="install"
@@ -40,7 +41,7 @@ fi
 tanzu package $ACTION tap \
   -p tap.tanzu.vmware.com \
   -v "$TAP_VERSION" \
-  --values-file values.yaml \
+  --values-file $TAP_DIR/values.yaml \
   --wait="false" \
   -n "$NAMESPACE"
 

@@ -17,6 +17,8 @@ supply_chain: basic
 
 cnrs:
   domain_name: #@ "cnrs.{}".format(data.values.domain)
+  domain_template: "{{.Name}}-{{.Namespace}}.{{.Domain}}"
+  default_tls_secret: "tanzu-system-ingress/tap-cert"
 
 ootb_supply_chain_basic:
   registry:
@@ -27,18 +29,23 @@ ootb_supply_chain_basic:
 
 learningcenter:
   ingressDomain: #@ "tlc.{}".format(data.values.domain)
+  ingressSecret:
+    secretName: learningcenter-cert
 
 tap_gui:
   service_type: ClusterIP
   ingressEnabled: "true"
   ingressDomain: #@ data.values.domain
+  tls:
+    secretName: tap-cert
+    namespace: tanzu-system-ingress
   app_config:
     app:
-      baseUrl: #@ "http://tap-gui.{}".format(data.values.domain)
+      baseUrl: #@ "https://tap-gui.{}".format(data.values.domain)
     backend:
-      baseUrl: #@ "http://tap-gui.{}".format(data.values.domain)
+      baseUrl: #@ "https://tap-gui.{}".format(data.values.domain)
       cors:
-        origin: #@ "http://tap-gui.{}".format(data.values.domain)
+        origin: #@ "https://tap-gui.{}".format(data.values.domain)
 
 metadata_store:
   app_service_type: LoadBalancer
@@ -56,5 +63,8 @@ accelerator:
   domain: #@ data.values.domain
   ingress:
     include: true
+  tls:
+    secretName: tap-cert
+    namespace: tanzu-system-ingress
   server:
     service_type: ClusterIP
