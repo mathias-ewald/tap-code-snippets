@@ -2,12 +2,12 @@
 set -euo pipefail
 
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
-
-INSTALL_BUNDLE=${INSTALL_BUNDLE}
-INSTALL_REGISTRY_HOSTNAME=${INSTALL_REGISTRY_HOSTNAME}
-INSTALL_REGISTRY_USERNAME=${INSTALL_REGISTRY_USERNAME}
-INSTALL_REGISTRY_PASSWORD=${INSTALL_REGISTRY_PASSWORD}
 DOWNLOADS_DIR="$SCRIPT_DIR/downloads"
+
+export INSTALL_BUNDLE="registry.tanzu.vmware.com/tanzu-cluster-essentials/cluster-essentials-bundle@sha256:ab0a3539da241a6ea59c75c0743e9058511d7c56312ea3906178ec0f3491f51d"
+export INSTALL_REGISTRY_HOSTNAME="registry.tanzu.vmware.com"
+export INSTALL_REGISTRY_USERNAME="$TANZUNET_USERNAME"
+export INSTALL_REGISTRY_PASSWORD="$TANZUNET_PASSWORD"
 
 # Check if Tanzu Cluster Essentials bundle is available
 FILE_PATH="$DOWNLOADS_DIR/tanzu-cluster-essentials.tgz"

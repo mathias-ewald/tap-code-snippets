@@ -3,7 +3,7 @@ set -euo pipefail
 
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
-REFRESH_TOKEN="${REFRESH_TOKEN}"
+REFRESH_TOKEN="${TANZUNET_REFRESH_TOKEN}"
 DOWNLOAD_DIR="$SCRIPT_DIR/downloads"
 
 mkdir -p $DOWNLOAD_DIR

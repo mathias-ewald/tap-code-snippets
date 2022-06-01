@@ -8,7 +8,6 @@ TAP_VERSION="$TAP_VERSION"
 TAP_DIR=$SCRIPT_DIR/tap
 
 # Create ClusterRoleBinding to allow PSP
-# TODO: Move to Paving Phase for GCP
 set +e
 kubectl create clusterrolebinding tap-psp-rolebinding \
   --group=system:authenticated \
@@ -44,6 +43,8 @@ tanzu package $ACTION tap \
   --values-file $TAP_DIR/values.yaml \
   --wait="false" \
   -n "$NAMESPACE"
+
+kubectl get packageinstalls -A
 
 echo "##################################################################"
 echo "Check \"kubectl get packageinstalls -A\" to watch progress"
