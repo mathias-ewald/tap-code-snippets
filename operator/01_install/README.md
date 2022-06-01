@@ -1,35 +1,79 @@
 # Install
 
-Set up environment variables needed along the process:
+1. Download required items from Tanzu Network
 ```
-PROJECT_ID="cso-pcfs-emea-mewald"
-REGION="europe-west3"
-
-TANZUNET_USERNAME="mathiase@vmware.com"
-TANZUNET_PASSWORD="**************"
-```
-
-```
-export REFRESH_TOKEN="*****************"
+export TANZUNET_REFRESH_TOKEN='****************'
 ./00_download.sh
+```
 
-export INSTALL_BUNDLE=registry.tanzu.vmware.com/tanzu-cluster-essentials/cluster-essentials-bundle@sha256:ab0a3539da241a6ea59c75c0743e9058511d7c56312ea3906178ec0f3491f51d
-export INSTALL_REGISTRY_HOSTNAME=registry.tanzu.vmware.com
-export INSTALL_REGISTRY_USERNAME="$TANZUNET_USERNAME"
-export INSTALL_REGISTRY_PASSWORD="$TANZUNET_PASSWORD"
+2. Install Cluster Essentials (kapp-controller, carvel tools) on the cluster and the local machine
+```
+export TANZUNET_USERNAME="mathiase@vmware.com"
+export TANZUNET_PASSWORD="**************"
+./01_install-cluster-essentials.sh
+```
+
+3. Install Tanzu CLI on the local machine
+```
+./02_install-tanzu-cli.sh
+```
+
+4. Relocate TAP images
+```
+# Source
+export TANZUNET_USERNAME="mathiase@vmware.com"
+export TANZUNET_PASSWORD='**************'
 export TAP_VERSION="1.1.0"
 
-./01_install-cluster-essentials.sh
-./02_install-tanzu-cli.sh
-./03_install-tap-repo.sh
-./04_install-or-update-tap.sh
-./05_dns-records.sh
-./06_tls.sh
+# Destination
+export INSTALL_REGISTRY_HOSTNAME=gcr.io
+export INSTALL_REGISTRY_REPO=cso-pcfs-emea-mewald
+
+./03_relocate-images.sh
 ```
 
+5. Install the TAP Repository on the K8s cluster
 ```
-watch kubectl get packageinstalls -A
+export INSTALL_REGISTRY_HOSTNAME=gcr.io
+export INSTALL_REGISTRY_REPO=cso-pcfs-emea-mewald
+./04_install-tap-repo.sh
 ```
+
+6. Install TAP
+
+Prepare the `secrets.yaml` file:
+```
+cp tap/secrets-example.yaml tap/secrets.yaml
+vim tap/secrets.yaml
+```
+
+Configure the installation via `config.yaml`
+```
+vim tap/config.yaml
+```
+
+Install TAP
+```
+export TAP_VERSION="1.1.0"
+./05_install-or-update-tap.sh
+```
+
+7. Get the wildcard DNS name and IP address to set up the record
+```
+./06_dns-records.sh
+```
+
+8. Create TLS certificates
+```
+./07_tls.sh
+```
+You can watch the progress via  `kubectl get certs -A`
+
+9. Open your browser at
+```
+./08_fqdn.sh
+```
+
 
 # Uninstall
 
