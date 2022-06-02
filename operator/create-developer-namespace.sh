@@ -1,15 +1,14 @@
 #!/bin/bash
 set -euxo pipefail
 
-# Name of the developer namespace
-NAMESPACE="$1"
+NAMESPACE="$1" # Name of the developer namespace
+GOOGLE_APPLICATION_CREDENTIALS=${GOOGLE_APPLICATION_CREDENTIALS}
 
-kubectl create ns $NAMESPACE
-
-# Values for Google Container Registry (GCR)
 REGISTRY_SERVER="gcr.io"
 REGISTRY_USERNAME="_json_key"
 REGISTRY_PASSWORD_FILE=$GOOGLE_APPLICATION_CREDENTIALS
+
+kubectl create ns $NAMESPACE
 
 tanzu secret registry add registry-credentials \
   --server $REGISTRY_SERVER \
