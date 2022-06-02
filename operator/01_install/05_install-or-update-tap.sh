@@ -8,6 +8,7 @@ TAP_VERSION="$TAP_VERSION"
 TAP_DIR=$SCRIPT_DIR/tap
 
 # Create ClusterRoleBinding to allow PSP
+# TODO: GCP specific -> Move to paving if possible
 set +e
 kubectl create clusterrolebinding tap-psp-rolebinding \
   --group=system:authenticated \
