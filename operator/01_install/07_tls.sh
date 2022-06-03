@@ -18,8 +18,3 @@ ytt -f $TLS_DIR/cluster-issuer.yaml -f $TAP_DIR/config.yaml -f $TAP_DIR/secrets.
 
 echo "Creating Certificates"
 ytt -f $TLS_DIR/certificate.yaml -f $TAP_DIR/config.yaml -f $TAP_DIR/secrets.yaml | kubectl apply -f -
-
-# Warning: This might not be persistent
-kubectl -n knative-serving patch configmap/config-network \
-  --type merge \
-  -p '{"data":{"auto-tls":"Enabled", "http-protocol":"Redirected"}}'

@@ -1,11 +1,12 @@
 #!/bin/bash
-set -euo pipefail
+set -euxo pipefail
 
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
 NAMESPACE="tap-install"
 TAP_VERSION="$TAP_VERSION"
 TAP_DIR=$SCRIPT_DIR/tap
+TLS_DIR=$SCRIPT_DIR/tls
 
 # Create ClusterRoleBinding to allow PSP
 # TODO: GCP specific -> Move to paving if possible
@@ -38,12 +39,22 @@ if [ "$(check_install_or_upgrade)" == 'upgrade' ]; then
   ACTION="installed update"
 fi
 
+set +e
+kubectl create secret generic tap-pkgi-overlay-0-cnrs-network-config \
+  --namespace tap-install \
+  --from-file="tap-pkgi-overlay-0-cnrs-network-config.yaml=${TLS_DIR}/tap-pkgi-overlay-0-cnrs-network-config.yaml"
+set -e
+
 tanzu package $ACTION tap \
   -p tap.tanzu.vmware.com \
   -v "$TAP_VERSION" \
   --values-file $TAP_DIR/values.yaml \
   --wait="false" \
   -n "$NAMESPACE"
+
+kubectl annotate packageinstalls tap \
+  --namespace tap-install \
+  --overwrite ext.packaging.carvel.dev/ytt-paths-from-secret-name.0=tap-pkgi-overlay-0-cnrs-network-config
 
 kubectl get packageinstalls -A
 
