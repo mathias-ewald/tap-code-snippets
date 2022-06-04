@@ -1,4 +1,6 @@
-# Install
+# Installation
+
+## Procedure
 
 1. Download required items from Tanzu Network
 ```
@@ -74,6 +76,38 @@ You can watch the progress via  `kubectl get certs -A`
 ./08_fqdn.sh
 ```
 
+## Troubleshooting
+
+### TLS Redirect Is Not Working
+It is possible the `ConfigMap` `config-network` has not been edited via the
+overlay in time, to the change wasn't picked up during installation.
+
+Verify: 
+```
+kubectl -n cnrs kubectl -n knative-serving get cm config-network -o yaml
+```
+Fix:
+```
+kubectl -n knative-serving delete cm config-network
+kctrl package installed kick -i cnrs -n tap-install
+``` 
+
+### The Learning Center Training Portal Is Not Available
+You should be able to reach the built-int workshop at
+`https://learning-center-guided.tlc.YOUR_DOMAIN`. If that's not the case, it
+might be the `TrainingPortal` resource did not pick up the `Secret` containing
+the certificate.
+
+Verify:
+```
+kubectl get trainingportals
+kubectl describe trainingportal learning-center-guided 
+```
+Fix: 
+```
+kubectl delete trainingportals learning-center-guided
+kctrl package installed kick -i learningcenter-workshops -n tap-install
+```
 
 # Uninstall
 

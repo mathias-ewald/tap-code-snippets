@@ -30,9 +30,9 @@ metadata:
   name: learningcenter-cert
   namespace: learningcenter
 spec:
-  commonName: #@ "*.learning-center.{}".format(data.values.domain)
+  commonName: #@ "*.tlc.{}".format(data.values.domain)
   dnsNames:
-  - #@ "*.learning-center.{}".format(data.values.domain)
+  - #@ "*.tlc.{}".format(data.values.domain)
   duration: 2160h0m0s
   issuerRef:
     kind: ClusterIssuer
