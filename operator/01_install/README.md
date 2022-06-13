@@ -25,7 +25,6 @@ export TANZUNET_PASSWORD="**************"
 # Source
 export TANZUNET_USERNAME="mathiase@vmware.com"
 export TANZUNET_PASSWORD='**************'
-export TAP_VERSION="1.1.0"
 
 # Destination
 export INSTALL_REGISTRY_HOSTNAME=gcr.io
@@ -56,7 +55,6 @@ vim tap/config.yaml
 
 Install TAP
 ```
-export TAP_VERSION="1.1.0"
 ./05_install-or-update-tap.sh
 ```
 
