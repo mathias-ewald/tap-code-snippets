@@ -8,7 +8,7 @@ REGISTRY_SERVER="gcr.io"
 REGISTRY_USERNAME="_json_key"
 REGISTRY_PASSWORD_FILE=$GOOGLE_APPLICATION_CREDENTIALS
 
-kubectl create ns $NAMESPACE
+kubectl create ns --dry-run=client -o yaml $NAMESPACE | kubectl apply -f -
 
 tanzu secret registry add registry-credentials \
   --server $REGISTRY_SERVER \
