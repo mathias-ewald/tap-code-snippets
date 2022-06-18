@@ -7,6 +7,7 @@ REGION="${REGION}"
 
 BUCKET_NAME="gs://tap-$ENVIRONMENT_NAME-tfstate"
 
+set +e
 gsutil ls | grep $BUCKET_NAME > /dev/null 2>&1
 if [ $? -eq 0 ]; then
   echo "Bucket $BUCKET_NAME already exists."
@@ -20,3 +21,4 @@ else
     -b on \
     $BUCKET_NAME
 fi
+set -e

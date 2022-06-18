@@ -3,38 +3,40 @@ module "vpc" {
   project_id   = var.project_id
   network_name = "tap-vpc-${var.environment}"
   subnets = [{
-    subnet_name   = "subnet-01"
+    subnet_name   = "subnet-01-${var.environment}"
     subnet_ip     = "10.0.0.0/16"
     subnet_region = var.region
   }]
   secondary_ranges = {
-    subnet-01 = [{
-      range_name    = "subnet-01-secondary-01"
+    "subnet-01-${var.environment}" = [{
+      range_name    = "subnet-01-${var.environment}-secondary-01"
       ip_cidr_range = "10.10.0.0/16"
       }, {
-      range_name    = "subnet-01-secondary-02"
+      range_name    = "subnet-01-${var.environment}-secondary-02"
       ip_cidr_range = "10.20.0.0/16"
     }]
   }
 }
 
 module "jumphost" {
-  name          = "tap-jumphost-${var.environment}"
-  source        = "terraform-google-modules/bastion-host/google"
-  project       = var.project_id
-  zone          = var.zones[0]
-  network       = module.vpc.network_name
-  subnet        = module.vpc.subnets_names[0]
-  image_family  = "ubuntu-2110"
-  image_project = "ubuntu-os-cloud"
-  ephemeral_ip  = true
-  startup_script = file("startup.sh")
+  name                       = "tap-jumphost-${var.environment}"
+  source                     = "terraform-google-modules/bastion-host/google"
+  project                    = var.project_id
+  zone                       = var.zones[0]
+  service_account_name       = "bastion-${var.environment}"
+  network                    = module.vpc.network_name
+  subnet                     = module.vpc.subnets_names[0]
+  image_family               = "ubuntu-2110"
+  image_project              = "ubuntu-os-cloud"
+  external_ip                = true
+  startup_script             = file("startup.sh")
+  fw_name_allow_ssh_from_iap = "allow-ssh-from-iap-to-tunnel-${var.environment}"
 }
 
 
 resource "google_service_account" "default" {
-  account_id   = "service-account-id"
-  display_name = "Service Account"
+  account_id   = "tap-${var.environment}"
+  display_name = "Service account for the TAP ${var.environment} environment"
 }
 
 module "gke" {
@@ -45,8 +47,8 @@ module "gke" {
   regional                   = true
   network                    = module.vpc.network_name
   subnetwork                 = module.vpc.subnets_names[0]
-  ip_range_pods              = "subnet-01-secondary-01"
-  ip_range_services          = "subnet-01-secondary-02"
+  ip_range_pods              = "subnet-01-${var.environment}-secondary-01"
+  ip_range_services          = "subnet-01-${var.environment}-secondary-02"
   http_load_balancing        = false
   horizontal_pod_autoscaling = true
   network_policy             = false
