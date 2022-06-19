@@ -24,3 +24,10 @@ cloudDNS:
 letsencrypt:
   email: mathias.ewald@googlemail.com
   issuer: letsencrypt-dns
+
+github:
+  #@overlay/match missing_ok=True
+  clientId: 
+  #@overlay/match missing_ok=True
+  clientSecret: 
+

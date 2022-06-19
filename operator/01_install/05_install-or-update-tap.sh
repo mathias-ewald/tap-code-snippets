@@ -31,7 +31,12 @@ function check_install_or_upgrade () {
 }
 
 # Generate the final values.yaml for the TAP package
-ytt -f $TAP_DIR/values-template.yaml -f $TAP_DIR/config.yaml -f $TAP_DIR/secrets.yaml > $TAP_DIR/values.yaml
+ytt \
+  -f $TAP_DIR/values-template.yaml \
+  -f $TAP_DIR/config.yaml \
+  -f $TAP_DIR/github-auth.yaml \
+  -f $TAP_DIR/secrets.yaml \
+  > $TAP_DIR/values.yaml
 
 # Install or update the TAP package
 ACTION="install"
