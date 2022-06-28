@@ -53,6 +53,7 @@ module "gke" {
   horizontal_pod_autoscaling = true
   network_policy             = false
   remove_default_node_pool   = true
+  kubernetes_version         = "1.23.6-gke.2200"
   cluster_autoscaling = {
     enabled       = false
     max_cpu_cores = 0
