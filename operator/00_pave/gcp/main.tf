@@ -76,7 +76,6 @@ module "gke" {
       auto_repair            = true
       auto_upgrade           = true
       create_service_account = true
-      service_account        = "service-account-id@${var.project_id}.iam.gserviceaccount.com"
       preemptible            = false
       autoscaling            = true
       initial_node_count     = 1
