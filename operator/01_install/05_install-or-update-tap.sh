@@ -63,6 +63,7 @@ kubectl annotate packageinstalls tap \
 
 kubectl get packageinstalls -A
 
+set +x
 echo "##################################################################"
 echo "Check \"kubectl get packageinstalls -A\" to watch progress"
 echo "##################################################################"
