@@ -4,7 +4,7 @@ set -euxo pipefail
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
 NAMESPACE="tap-install"
-TAP_VERSION="${TAP_VERSION:-1.1.1}"
+TAP_VERSION="${TAP_VERSION:-${TAP_VERSION_DEFAULT}"
 TAP_DIR=$SCRIPT_DIR/tap
 TLS_DIR=$SCRIPT_DIR/tls
 

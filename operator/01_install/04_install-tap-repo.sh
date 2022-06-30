@@ -2,6 +2,7 @@
 set -euxo pipefail
 
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+source $SCRIPT_DIR/common.sh
 
 INSTALL_REGISTRY_HOSTNAME=${INSTALL_REGISTRY_HOSTNAME}
 INSTALL_REGISTRY_REPO=${INSTALL_REGISTRY_REPO}
@@ -9,7 +10,7 @@ INSTALL_REGISTRY_USERNAME=${INSTALL_REGISTRY_USERNAME}
 set +x
 INSTALL_REGISTRY_PASSWORD=${INSTALL_REGISTRY_PASSWORD}
 set -x
-TAP_VERSION=${TAP_VERSION:-1.1.2}
+TAP_VERSION=${TAP_VERSION:-${TAP_VERSION_DEFAULT}}
 
 # Create namespace if not exists
 kubectl create namespace tap-install --dry-run=client -o yaml | kubectl apply -f -
