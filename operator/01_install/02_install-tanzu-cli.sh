@@ -19,7 +19,8 @@ tar xvf $FILE_PATH -C $FRAMEWORK_DIR > /dev/null 2>&1
 # Install Tanzu Framework
 export TANZU_CLI_NO_INIT=true
 pushd $FRAMEWORK_DIR
-  sudo install cli/core/v0.11.1/tanzu-core-linux_amd64 /usr/local/bin/tanzu
+  DIR=$(file cli/core/v* | cut -d ':' -f 1)
+  sudo install $DIR/tanzu-core-linux_amd64 /usr/local/bin/tanzu
   tanzu version
   tanzu plugin install --local cli all
   tanzu plugin list
