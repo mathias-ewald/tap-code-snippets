@@ -2,9 +2,11 @@
 set -euxo pipefail
 
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+source common.sh
 
 NAMESPACE="tap-install"
-TAP_VERSION="${TAP_VERSION:-${TAP_VERSION_DEFAULT}"
+TAP_VERSION="${TAP_VERSION:-$TAP_VERSION_DEFAULT}"
+
 TAP_DIR=$SCRIPT_DIR/tap
 TLS_DIR=$SCRIPT_DIR/tls
 

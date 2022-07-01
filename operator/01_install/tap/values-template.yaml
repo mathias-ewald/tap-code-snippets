@@ -11,7 +11,7 @@ buildservice:
   tanzunet_username: #@ data.values.tanzunet.username
   tanzunet_password: #@ "{}".format(data.values.tanzunet.password)
   descriptor_name: "full"
-  enable_automatic_dependency_updates: true
+  enable_automatic_dependency_updates: false
 
 supply_chain: basic
 
