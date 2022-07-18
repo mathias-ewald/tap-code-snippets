@@ -65,8 +65,9 @@ accelerator:
   domain: #@ data.values.domain
   ingress:
     include: true
+    enable_tls: true
   tls:
-    secretName: tap-cert
+    secret_name: tap-cert
     namespace: tanzu-system-ingress
   server:
     service_type: ClusterIP
